@@ -2,19 +2,20 @@ if [ ! -d /app/.heroku/miniconda ]; then
     puts-step "Preparing Python/Miniconda Environment"
     curl -Os http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
     bash Miniconda3-latest-Linux-x86_64.sh  -p /app/.heroku/miniconda/ -b | indent
-    rm -fr Miniconda3-latest-Linux-x86_64.sh
-    conda update conda pip --yes | indent
-    conda config --add channels conda-forge
+    rm -fr Miniconda3-latest-Linux-x86_64.sh    
 fi
+
+conda update conda pip --yes --quiet
+conda config --add channels conda-forge
 
 echo "nomkl" > $HOME/.heroku/miniconda/conda-meta/pinned
 echo "added pinned file in $HOME/.heroku/miniconda/conda-meta/pinned"
-conda install nomkl
+conda install nomkl --yes --quiet
 
 
 if [ -f conda-requirements.txt ]; then
     puts-step "Installing dependencies using Conda"
-    conda install --file conda-requirements.txt --yes | indent
+    conda install --file conda-requirements.txt --yes --quiet | indent
 fi
 
 if [ -f requirements.txt ]; then
