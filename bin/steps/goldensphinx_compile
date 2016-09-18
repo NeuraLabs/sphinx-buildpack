@@ -1,6 +1,6 @@
 # goldensphinx
 puts-step "Installing goldensphinx"
-pip install goldensphinx --yes --quiet | indent
+pip install goldensphinx --exists-action=w --allow-all-external | indent
 
 # remove Procfile
 if [ -f Procfile ]; then
