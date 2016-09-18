@@ -1,0 +1,9 @@
+# goldensphinx
+puts-step "Installing goldensphinx"
+pip install goldensphinx --yes --quiet | indent
+
+# remove Procfile
+if [ -f Procfile ]; then
+  puts-step "Removing Procfile"
+  rm Procfile
+fi
